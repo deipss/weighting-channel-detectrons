@@ -6,10 +6,24 @@ import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from PIL import Image, ImageDraw
-
+from pycocotools.coco import COCO
 """
 播放一个视频
 """
+
+def coco_analysis():
+    val_coco = COCO('../data/Brackish/annotations/annotations_COCO/train_groundtruth.json')
+    print(val_coco.cats)
+    ids = val_coco.catToImgs[2]
+    ids_unique =list(set(ids))
+    print(ids_unique)
+    imgs_cate= [val_coco.imgs.get(e)for e in ids_unique]
+    anno_cate = [val_coco.imgToAnns.get(e) for e in ids_unique]
+    anno_cate_1d = [item for sublist in anno_cate for item in sublist]
+    print(len(imgs_cate))
+    print(len(anno_cate_1d))
+    print(len(ids_unique))
+
 
 
 def play_video(video_path):
@@ -140,7 +154,9 @@ def load_helper_json():
 
 
 if __name__ == '__main__':
-    load_helper_json()
+    coco_analysis()
+
+
 
 
 class BrackishDataset(Dataset):

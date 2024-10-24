@@ -12,7 +12,7 @@ from pycocotools.coco import COCO
 """
 
 def coco_analysis():
-    val_coco = COCO('../data/Brackish/annotations/annotations_COCO/train_groundtruth.json')
+    val_coco = COCO('/data/ai_data/Brackish/annotations/annotations_COCO/train_groundtruth.json')
     print(val_coco.cats)
     ids = val_coco.catToImgs[2]
     ids_unique =list(set(ids))
